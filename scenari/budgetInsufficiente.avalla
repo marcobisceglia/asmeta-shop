@@ -1,0 +1,26 @@
+scenario budgetInsufficiente
+load ../shop.asm
+check state = SCELTA_PRODOTTO;
+set selectedProduct := JUVE;
+step
+check state = SCELTA_OPZIONI;
+check currentProduct = JUVE;
+check message = "Scegli operazione";
+set selectedProduct := JUVE;
+set selectedOption := FORNITORI;
+step
+check state = QUANTITA_ORDINE;
+check currentProduct = JUVE;
+check message = "Scegli quantità da rifornire";
+check currentBudget = 500;
+check productCost(JUVE) = 10;
+set selectedProduct := JUVE;
+set selectedOption := FORNITORI;
+set insertedQuantity := 100;
+step
+check state = QUANTITA_ORDINE;
+check currentProduct = JUVE;
+check message = "Budget attuale non sufficiente. Scegli un'altra quantità";
+check currentBudget = 500;
+check productCost(JUVE) = 10;
+step

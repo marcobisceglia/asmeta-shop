@@ -1,0 +1,54 @@
+scenario scorteInsufficienti
+load ../shop.asm
+check state = SCELTA_PRODOTTO;
+set selectedProduct := JUVE;
+step
+check state = SCELTA_OPZIONI;
+check currentProduct = JUVE;
+check message = "Scegli operazione";
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+step
+check state = QUANTITA_VENDITA;
+check currentProduct = JUVE;
+check message = "Scegli quantità da vendere";
+check stock(JUVE) = 20;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 100;
+step
+check state = QUANTITA_VENDITA;
+check currentProduct = JUVE;
+check message = "Quantità richiesta non sufficiente. Scegli un'altra quantità";
+check stock(JUVE) = 20;
+check totalRevenue = 0;
+check productToString(JUVE) = "JUVE";
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 0;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 10;
+step
+check state = AGGIORNAMENTO_BUDGET;
+check currentProduct = JUVE;
+check message = "Aggiorno bilancio dopo vendita di JUVE";
+check stock(JUVE) = 10;
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 10;
+step
+check state = SCELTA_PRODOTTO;
+check currentProduct = JUVE;
+check message = "Scelta del prodotto";
+check stock(JUVE) = 10;
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 750;
+check profit = 250;
+step

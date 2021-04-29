@@ -1,0 +1,103 @@
+scenario perdita
+load ../shop.asm
+check state = SCELTA_PRODOTTO;
+set selectedProduct := JUVE;
+step
+check state = SCELTA_OPZIONI;
+check currentProduct = JUVE;
+check message = "Scegli operazione";
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+step
+check state = QUANTITA_VENDITA;
+check currentProduct = JUVE;
+check message = "Scegli quantità da vendere";
+check totalRevenue = 0;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 20;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 0;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 10;
+step
+check state = AGGIORNAMENTO_BUDGET;
+check currentProduct = JUVE;
+check message = "Aggiorno bilancio dopo vendita di JUVE";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 10;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 10;
+step
+check state = SCELTA_PRODOTTO;
+check currentProduct = JUVE;
+check message = "Scelta del prodotto";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 10;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 750;
+set selectedProduct := JUVE;
+set selectedOption := VENDITA;
+set insertedQuantity := 10;
+step
+check state = SCELTA_OPZIONI;
+check currentProduct = JUVE;
+check message = "Scegli operazione";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 10;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 750;
+set selectedProduct := JUVE;
+set selectedOption := FORNITORI;
+set insertedQuantity := 10;
+step
+check state = QUANTITA_ORDINE;
+check currentProduct = JUVE;
+check message = "Scegli quantità da rifornire";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 10;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 750;
+check totalCost = 0;
+check productCost(JUVE) = 10;
+set selectedProduct := JUVE;
+set selectedOption := FORNITORI;
+set insertedQuantity := 30;
+step
+check state = AGGIORNAMENTO_BUDGET;
+check currentProduct = JUVE;
+check message = "Aggiorno bilancio dopo l'ordine di JUVE";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 40;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 750;
+check totalCost = 300;
+check productCost(JUVE) = 10;
+set selectedProduct := JUVE;
+set selectedOption := FORNITORI;
+set insertedQuantity := 30;
+step
+check state = SCELTA_PRODOTTO;
+check currentProduct = JUVE;
+check message = "Scelta del prodotto";
+check totalRevenue = 250;
+check productToString(JUVE) = "JUVE";
+check stock(JUVE) = 40;
+check productPrice(JUVE) = 25;
+check soldProducts(JUVE) = 10;
+check currentBudget = 450;
+check totalCost = 300;
+check productCost(JUVE) = 10;
+step
